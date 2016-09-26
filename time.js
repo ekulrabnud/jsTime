@@ -3,16 +3,12 @@ function log(){
 	for (var i=0;i < arguments.length;i++){
 		console.log(arguments[i]);
 	}
-
-	
-
 }
 
 testevent ={
 	'date':"2016-09-24",
 	'start':"22:30",
-	'stop':"23:14",
-	'event':"test"
+	'stop':"23:14"	
 }
 
 function split(time,delimiter){
@@ -22,24 +18,28 @@ function split(time,delimiter){
 	for (i in splitTime){
 		splitTime[i] = parseInt((splitTime[i]));
 	}
-
 	return splitTime
 }
 
+var parseEvent = function(event){
+
+	for  (time in event){
+		log(event[time]);
+	}
+}
+
 function isEventOn(event,future){
-	// offset provided so that we can see events in the future.
+	// future
 
 	var now = new Date();
-	
 	future = new Date(now.getTime() + (future * 60000))
-
 
 	date = event['date'].split('-');
 	start = event['start'].split(':');
 	stop = event['stop'].split(':');
 
 	year = parseInt(date[0])
-	//Date object assignes JAN as month 0..therefore subtract 1
+	//Date object assigs JAN as month 0..therefore subtract 1
 	month = (parseInt(date[1])) - 1;
 	day = parseInt(date[2])
 	startHour = parseInt(start[0]);
@@ -78,7 +78,7 @@ function isEventOn(event,future){
 	return true;
 }
 
-
+parseEvent(testevent)
 isEventOn(testevent,30)
 
 
